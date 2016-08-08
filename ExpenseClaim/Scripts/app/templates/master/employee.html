@@ -1,0 +1,73 @@
+﻿<h3>Master - Employee</h3>
+<br />
+
+<div id="rcornersBlue">
+    <h4>Create New</h4><br />
+    <div class="row">
+        <div class="col-md-10">
+            <div class="col-md-4">
+                <label>MET ID:</label>
+                <input type="text" ng-model="ctrl.basefilm.metID" id="metID" />
+            </div>
+            <div class="col-md-4">
+                <label>MET NAME:</label>
+                <input type="text" ng-model="ctrl.basefilm.metName" />
+            </div>
+            <div class="col-md-4">
+                <label>MET TYPE:</label>
+                <input type="text" ng-model="ctrl.basefilm.metType" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-block" style="color:#4299d8;" ng-click="ctrl.addBaseFilm()">SUBMIT</button>
+</div>
+<br />
+
+<div>
+
+    <table class="table" st-pipe="ctrl.callServer" st-table="ctrl.displayed">
+        <thead>
+            <tr class="tableHeader">
+                <th>#           </th>
+                <th>MET ID      </th>
+                <th>MET NAME    </th>
+                <th>MET TYPE    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody ng-show="!ctrl.isLoading">
+            <tr ng-repeat="row in ctrl.displayed">
+                <td cs-select="row" add-item="ctrl.selectedBaseFilm"></td>
+
+                <td ng-hide="row.isSelected">{{row.metID }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.metID" />
+                </td>
+                <td ng-hide="row.isSelected">{{row.metName }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.metName" />
+                </td>
+                <td ng-hide="row.isSelected">{{row.metType }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.metType" />
+                </td>
+                <td><button class="btn btn-danger" ng-click="ctrl.deleteBaseFilm(row)">X</button> </td>
+            </tr>
+        </tbody>
+        <tbody ng-show="ctrl.isLoading">
+            <tr>
+                <td colspan="9" class="text-center">Loading ... </td>
+            </tr>
+        </tbody>
+        <tfoot ng-if="ctrl.displayed.length > 0">
+            <tr>
+                <td class="text-center" st-pagination="" st-items-by-page="10" colspan="9" st-template="/scripts/app/templates/plugin/pagination.custom.html"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div>
+        <button class="btn btn-warning" ng-click="ctrl.updateBaseFilm()">Update</button>
+    </div>
+</div>

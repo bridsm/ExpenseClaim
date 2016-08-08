@@ -1,0 +1,80 @@
+﻿<h3>Master - Department</h3>
+<br />
+
+<div id="rcornersBlue">
+    <h4>Create New</h4><br />
+    <div class="row">
+        <div class="col-md-3">
+            <label>PlantNo:</label>
+            <input type="text" ng-model="ctrl.prodItem.plantNo" id="plantNo" />
+        </div>
+        <div class="col-md-3">
+            <label>Cap/Day:</label>
+            <input type="text" ng-model="ctrl.prodItem.capPerDay" />
+        </div>
+        <div class="col-md-3">
+            <label>Width:</label>
+            <input type="text" ng-model="ctrl.prodItem.width" />
+        </div>
+        <div class="col-md-3">
+            <label>Factor:</label>
+            <input type="text" ng-model="ctrl.prodItem.factor" />
+        </div>
+    </div>
+    <br />
+    <button class="btn btn-block" style="color:#4299d8;" ng-click="ctrl.addMasteritem()">SUBMIT</button><br />
+</div>
+<br />
+
+<div>
+
+    <table class="table" st-pipe="ctrl.callServer" st-table="ctrl.displayed">
+        <thead>
+            <tr class="tableHeader">
+                <th>#</th>
+                <th>PlantNo       </th>
+                <th>CapPerDay         </th>
+                <th>Width         </th>
+                <th>Factor        </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody ng-show="!ctrl.isLoading">
+            <tr ng-repeat="row in ctrl.displayed">
+                <td cs-select="row" add-item="ctrl.selectedProductionLine"></td>
+
+                <td ng-hide="row.isSelected">{{row.plantNo }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.plantNo" />
+                </td>
+                <td ng-hide="row.isSelected">{{row.capPerDay }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.capPerDay" />
+                </td>
+                <td ng-hide="row.isSelected">{{row.width }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.width" />
+                </td>
+                <td ng-hide="row.isSelected">{{row.factor }}</td>
+                <td ng-show="row.isSelected">
+                    <input type="text" class="calendar width-75" ng-model="row.factor" />
+                </td>
+                <td><button class="btn btn-danger" ng-click="ctrl.deleteMasteritem(row)">X</button> </td>
+            </tr>
+        </tbody>
+        <tbody ng-show="ctrl.isLoading">
+            <tr>
+                <td colspan="9" class="text-center">Loading ... </td>
+            </tr>
+        </tbody>
+        <tfoot ng-if="ctrl.displayed.length > 0">
+            <tr>
+                <td class="text-center" st-pagination="" st-items-by-page="10" colspan="9" st-template="/scripts/app/templates/plugin/pagination.custom.html"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div>
+        <button class="btn btn-warning" ng-click="ctrl.updateMasteritem()">Update</button>
+    </div>
+</div>

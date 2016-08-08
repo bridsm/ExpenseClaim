@@ -1,0 +1,35 @@
+﻿<!--<h3>Login</h3>
+<br />-->
+ <form role="form">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-4">
+            <h2 class="form-login-heading col-md-12">Login</h2>
+            <div class="col-md-12 PaddingTop">
+                <input type="text" class="form-control" placeholder="Username" ng-model="ctrl.userlogin.username" required autofocus>
+            </div>
+            <div style="height:15px;"></div>
+            <div class="col-md-12 PaddingTop">
+                <input type="password" class="form-control" placeholder="Password" ng-model="ctrl.userlogin.password" required>
+            </div>
+            <div style="height:15px;"></div>
+            <div class="col-md-12 PaddingTop">
+                <button class="btn btn-md btn-info btn-block" type="submit" style="width: 280px;" ng-click="ctrl.login()">Login</button>
+            </div>
+            <div data-ng-hide="message == ''">
+                {{ctrl.message}}
+            </div>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li ng-if="ctrl.isAuthenticated=='true'"><a href="~/#home">Home</a></li>
+        </ul>
+    </div>
+</form>
